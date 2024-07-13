@@ -1,0 +1,32 @@
+name: 自动签到雨云
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 22 * * *' # 每天一次，UTC 时间晚上 10 点运行（即北京时间早上 6 点）
+  workflow_dispatch:
+
+jobs:
+  read-and-access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: 雨云签到
+      env:
+        RAINYUN_APIKEYS: ${{ secrets.RAINYUN_APIKEYS }}
+      run: |
+        IFS=',' read -r -a apikeys <<< "$RAINYUN_APIKEYS"
+
+        for apikey in "${apikeys[@]}"; do
+          response=$(curl -s --location --request POST 'https://api.v2.rainyun.com/user/reward/tasks' --header "x-api-key: $apikey" --header 'Content-Type: application/json' --data-raw '{"task_name": "每日签到"}')
+          if echo "$response" | grep -q '{"code":200,"data":"ok"}'; then
+            echo "签到成功"
+          else
+            echo "内容返回 : $response"
+          fi
+        done
