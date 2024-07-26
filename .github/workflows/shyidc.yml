@@ -22,7 +22,7 @@ jobs:
         uid_list=$(jq -r '.[]' shyidc.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -X POST -d "uid=${uid}" "https://www.vpsvr.com/addons?_plugin=11&_controller=index&_action=index")
+          response=$(curl -s -X POST -d "uid=${uid}" "https://www.wnki.cn/addons?_plugin=11&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
