@@ -22,7 +22,7 @@ jobs:
         uid_list=$(jq -r '.[]' hmmc.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -k -X POST -d "uid=${uid}" "https://www.hmmc.pro/addons?_plugin=8&_controller=index&_action=index")
+          response=$(curl -s -k -X POST -d "uid=${uid}" "https://www.yunmc.vip/addons?_plugin=8&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
