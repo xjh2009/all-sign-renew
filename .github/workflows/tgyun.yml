@@ -1,0 +1,34 @@
+name: 自动签到糖糕云
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 22 * * *' # 每天一次，UTC 时间晚上 10 点运行（即北京时间早上 6 点）
+  workflow_dispatch:
+
+jobs:
+  read-and-access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: 糖糕云签到
+      env:
+        TGYUN_USERPASSWD: ${{ secrets.TGYUN_USERPASSWD }}
+      run: |
+        IFS=',' read -r -a upds <<< "$TGYUN_USERPASSWD"
+
+        for upd in "${upds[@]}"; do
+          curl -c "ck.tgy" -X POST "https://cloud.tanggaoyun.cn/login?action=email" -d $upd
+          response=$(curl -b 'ck.tgy' 'https://cloud.tanggaoyun.cn/addons?_plugin=58&_controller=index&_action=qd' -X 'POST' -H 'x-requested-with: XMLHttpRequest')
+          rm -rf ck.tgy
+          if echo "$response" | grep -q '"code":1'; then
+            echo "签到成功"
+          else
+            echo "内容返回 : $response"
+          fi
+        done
