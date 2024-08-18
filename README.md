@@ -1,13 +1,13 @@
-# 蓝天云/海绵联机/雨云/优丰互联/大东云/山海云 自动签到/续费
+# 海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云 自动签到/续费
 
-使用Github Action自动签到/续费蓝天云/海绵联机/大东云/雨云/优丰云/山海云<br>
+使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云<br>
 
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 B站，抖音，名字不一，转载请注明作者<br>
 
 ## Tips
 
-各厂商链接[蓝天云](https://lantian.pro/)/[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)
+各厂商链接[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -21,17 +21,12 @@ Fork本项目<br>
 #### 启动Action
 进入您自己的项目，点击Action，启用Github Action功能<br>
 
-### 1.蓝天云
-
-因为一些外界力量导致无法使用GithubAction进行自动续费<br>
-所以你需要前往[lty.hxhl.bf](https://lty.hxhl.bf)添加队列任务<br>
-当然如果你想继续使用也可以寻找我们购买API 1元/月/60次
-
-### 2.海绵联机/优丰互联/山海云/大东云
+### 1.海绵联机/优丰互联/山海云/大东云
 
 
 #### 添加续费任务
-yfidc.json(优丰互联)/ddyidc.json(大东云)/hmmc.json(海绵联机)/shyidc.json(山海云)文件，分别添加你的用户ID
+
+yfidc.json(优丰互联)/ddyidc.json(大东云)/hmmc.json(海绵联机)/shyidc.json(山海云)/lfyidc.json(泷奉云)文件，分别添加你的用户ID
 <br>
 ```json
 [
@@ -41,6 +36,17 @@ yfidc.json(优丰互联)/ddyidc.json(大东云)/hmmc.json(海绵联机)/shyidc.j
 ```
 文件提交后，自动进入Github Action构建
 
+### 2.糖糕云
+
+#### 配置环境变量
+进入Settings->Secret and variables->Actions->New Repository secret
+将你的Name输入TGYUN_USERPASSWD<br>
+将你的Secret输入用户名密码<br>
+例子
+```
+email=test@email.cc&password=yourpassword,email=test2@email.cc&password=yourpassword2,email=test3@email.cc&password=yourpassword3
+```
+配置成环境变量
 
 ### 3.雨云
 
@@ -59,5 +65,4 @@ APIKEY1,APIKEY2,APIKEY3
 
 ## 相关项目
 [海绵联机自动签到](https://github.com/xjh2009/hmmc-renew)<br>
-[蓝天云自动续费](https://github.com/xjh2009/lty-renew)<br>
 [雨云自动续费](https://github.com/xjh2009/rainyun-renew)<br>
