@@ -43,7 +43,7 @@ jobs:
           msg=$(curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg')
           echo $msg
           if [ "$msg" == "验证码不正确" ]; then
-            echo '再次尝试'                    
+            echo '再次尝试'                  
             getcode_json=$(curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/')
             echo $getcode_json
             codes=$(echo $getcode_json | jq -r '.data')
