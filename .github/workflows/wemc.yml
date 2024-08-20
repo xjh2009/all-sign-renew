@@ -36,7 +36,23 @@ jobs:
           echo "$pure_base64_str"  | base64 --decode > wemccode.png  
           tesseract wemccode.png acode > /dev/null
           acode=$(cat acode.txt)
+          echo "识别的二维码内容：$acode"
           authcode=$( echo "$acode" | tr '=?' ' ' | bc)
-          curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg'
+          echo "计算结果：$authcode"
+          msg=$(curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg')
+          echo $msg
+          if [ "$msg" == "验证码不正确" ]; then
+            echo '再次尝试'
+            getcode_json=$(curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/')
+            base64_str=$(echo "$getcode_json" | jq -r '.data')  
+            pure_base64_str="${base64_str#*base64,}"  
+            echo "$pure_base64_str"  | base64 --decode > wemccode.png  
+            tesseract wemccode.png acode > /dev/null
+            acode=$(cat acode.txt)
+            echo "识别的二维码内容：$acode"
+            authcode=$( echo "$acode" | tr '=?' ' ' | bc)
+            echo "计算结果：$authcode"
+            curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg'
+          fi
           rm -rf wemc.ck acode.txt wemccode.png
         done
