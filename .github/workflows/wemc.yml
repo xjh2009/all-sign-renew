@@ -37,7 +37,7 @@ jobs:
           tesseract wemccode.png acode > /dev/null
           acode=$(cat acode.txt)
           echo "识别的二维码内容：$acode"
-          authcode=$( echo "$acode" | tr '=?' ' ' | bc)
+          authcode=$(echo "$acode" | tr '=?' ' ' | bc)
           echo "计算结果：$authcode"
           msg=$(curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg')
           echo $msg
@@ -50,7 +50,7 @@ jobs:
             tesseract wemccode.png acode > /dev/null
             acode=$(cat acode.txt)
             echo "识别的二维码内容：$acode"
-            authcode=$( echo "$acode" | tr '=?' ' ' | bc)
+            authcode=$(echo "$acode" | tr '=?' ' ' | bc)
             echo "计算结果：$authcode"
             curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg'
           fi
