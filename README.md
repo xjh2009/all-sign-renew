@@ -1,13 +1,13 @@
-# 海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云 自动签到/续费
+# 海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC 自动签到/续费
 
-使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云<br>
+使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC<br>
 
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 B站，抖音，名字不一，转载请注明作者<br>
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)
+各厂商链接[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)/[WeMC](https://wemc.cc/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -21,7 +21,7 @@ Fork本项目<br>
 #### 启动Action
 进入您自己的项目，点击Action，启用Github Action功能<br>
 
-### 1.海绵联机/优丰互联/山海云/大东云
+### 1.海绵联机/优丰互联/山海云/大东云/泷奉云
 
 
 #### 添加续费任务
@@ -44,7 +44,7 @@ yfidc.json(优丰互联)/ddyidc.json(大东云)/hmmc.json(海绵联机)/shyidc.j
 将你的Secret输入用户名密码<br>
 例子
 ```
-email=test@email.cc&password=yourpassword,email=test2@email.cc&password=yourpassword2,email=test3@email.cc&password=yourpassword3
+email=test1@test1.com&password=password1,email=test2@test2.com&password=password2
 ```
 配置成环境变量
 
@@ -59,6 +59,19 @@ email=test@email.cc&password=yourpassword,email=test2@email.cc&password=yourpass
 APIKEY1,APIKEY2,APIKEY3
 ```
 配置成环境变量
+
+### 4.WeMC
+
+#### 配置环境变量
+进入Settings->Secret and variables->Actions->New Repository secret
+将你的Name输入WEMC_USERPASSWD<br>
+将你的Secret输入账户密码<br>
+例子
+```
+test1@test1.com:password1,test2@test2.com:password2
+```
+配置成环境变量
+
 
 ### 定时执行
 每日北京时间6点自动续费<br>
