@@ -1,0 +1,42 @@
+name: 自动签到WeMC
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 22 * * *' # 每天一次，UTC 时间晚上 10 点运行（即北京时间早上 6 点）
+  workflow_dispatch:
+
+jobs:
+  read-and-access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: WeMC签到
+      env:
+        WEMC_USERPASSWD: ${{ secrets.WEMC_USERPASSWD }}
+      run: |
+        sudo apt install tesseract-ocr jq bc base64 -y 
+
+        IFS=',' read -r -a up <<< "$WEMC_USERPASSWD"
+
+ 
+        for item in "${up[@]}"; do  
+          IFS=':' read -r email password <<< "$item"  
+          echo "正在签到前两位邮箱：${email:0:2}"
+          curl -s -c 'wemc.ck' -X 'POST' 'https://wemc.cc/v1/auth/login/' -H 'content-type: application/json' -d "{\"email\":\"$email\",\"password\":\"$password\"}" | jq -r '.msg'
+          curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/' > /dev/null
+          getcode_json=$(curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/')
+          base64_str=$(echo "$getcode_json" | jq -r '.data')  
+          pure_base64_str="${base64_str#*base64,}"  
+          echo "$pure_base64_str"  | base64 --decode > wemccode.png  
+          tesseract wemccode.png acode > /dev/null
+          acode=$(cat acode.txt)
+          authcode=$( echo "$acode" | tr '=?' ' ' | bc)
+          curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg'
+          rm -rf wemc.ck acode.txt wemccode.png
+        done
