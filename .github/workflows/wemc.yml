@@ -43,10 +43,11 @@ jobs:
           msg=$(curl -s -b 'wemc.ck' "https://wemc.cc/v1/user/sign/?code=$authcode" | jq -r '.msg')
           echo $msg
           if [ "$msg" == "验证码不正确" ]; then
-            echo '再次尝试'          
-            getcode_json=$(curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/' | jq -r '.data')
+            echo '再次尝试'                    
+            getcode_json=$(curl -s -b 'wemc.ck' 'https://wemc.cc/v1/user/sign/code/')
             echo $getcode_json
-            pure_base64_str="${getcode_json#*base64,}"  
+            codes=$(echo $getcode_json | jq -r '.data')
+            pure_base64_str="${codes#*base64,}"  
             echo "$pure_base64_str"  | base64 --decode > wemccode.png  
             tesseract wemccode.png acode > /dev/null
             acode=$(cat acode.txt)
