@@ -20,7 +20,7 @@ jobs:
       env:
         WEMC_USERPASSWD: ${{ secrets.WEMC_USERPASSWD }}
       run: |
-        sudo apt install tesseract-ocr jq bc base64 -y 
+        sudo apt install tesseract-ocr jq bc -y 
 
         IFS=',' read -r -a up <<< "$WEMC_USERPASSWD"
 
