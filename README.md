@@ -36,7 +36,19 @@ yfidc.json(优丰互联)/ddyidc.json(大东云)/hmmc.json(海绵联机)/shyidc.j
 ```
 文件提交后，自动进入Github Action构建
 
-### 2.糖糕云
+### 2.海绵联机
+
+#### 配置环境变量
+进入Settings->Secret and variables->Actions->New Repository secret
+将你的Name输入HMLJ_USERPASSWD<br>
+将你的Secret输入用户名密码<br>
+例子
+```
+email=test1@test1.com&password=password1,email=test2@test2.com&password=password2
+```
+配置成环境变量
+
+### 3.糖糕云
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret
@@ -48,7 +60,7 @@ email=test1@test1.com&password=password1,email=test2@test2.com&password=password
 ```
 配置成环境变量
 
-### 3.雨云
+### 4.雨云
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret
@@ -60,7 +72,7 @@ APIKEY1,APIKEY2,APIKEY3
 ```
 配置成环境变量
 
-### 4.WeMC
+### 5.WeMC
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret
