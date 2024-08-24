@@ -1,4 +1,4 @@
-name: 自动签到海绵联机2
+name: 新自动签到海绵联机
 
 on:
   push:
@@ -23,8 +23,9 @@ jobs:
         IFS=',' read -r -a upds <<< "$HMLJ_USERPASSWD"
 
         for upd in "${upds[@]}"; do
-          curl -c "ck.hmlj" -X POST "https://www.yunmc.vip/login?action=email" -d $upd
-          response=$(curl -b 'ck.hmlj' 'https://www.yunmc.vip/addons?_plugin=points_mall&_controller=index&_action=sign' -X 'POST' -H 'x-requested-with: XMLHttpRequest')
+          curl -s -c "ck.hmlj" -X POST "https://www.yunmc.vip/login?action=email" -d $upd
+          curl -s -b 'ck.hmlj' 'https://www.yunmc.vip/addons?_plugin=points_mall&_controller=index&_action=sign'  > /dev/null
+          response=$(curl -s -b 'ck.hmlj' 'https://www.yunmc.vip/addons?_plugin=points_mall&_controller=index&_action=sign' -X 'POST' -H 'x-requested-with: XMLHttpRequest')
           rm -rf ck.hmlj
           if echo "$response" | grep -q '"code":1'; then
             echo "签到成功"
