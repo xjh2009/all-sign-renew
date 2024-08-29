@@ -7,7 +7,7 @@ B站，抖音，名字不一，转载请注明作者<br>
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)
+各厂商链接[海绵联机](https://www.hmmc.pro/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -96,10 +96,19 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 ```
 配置成环境变量
 
+### 7.灰狼云虚拟主机
+
+#### 配置环境变量
+进入Settings->Secret and variables->Actions->New Repository secret
+将你的Name输入YUN316_USERPASSWD<br>
+将你的Secret输入账户密码和主机ID<br>
+例子
+```
+邮箱1:密码1:主机ID1,邮箱2:密码2:主机ID2
+```
+配置成环境变量
+
+
 
 ### 定时执行
 每日北京时间6点自动续费<br>
-
-## 相关项目
-[海绵联机自动签到](https://github.com/xjh2009/hmmc-renew)<br>
-[雨云自动续费](https://github.com/xjh2009/rainyun-renew)<br>
