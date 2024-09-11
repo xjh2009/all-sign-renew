@@ -19,10 +19,10 @@ jobs:
     - name: 从文件读取需要签到的ID
       run: |
         sudo apt-get install -y jq
-        uid_list=$(jq -r '.[]' shyidc.json)
+        uid_list=$(jq -r '.shyidc[]' sign.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -X POST -d "uid=${uid}" "https://idc.vpsvr.cn/addons?_plugin=11&_controller=index&_action=index")
+          response=$(curl -s -X POST -d "uid=${uid}" "https://idc.vpsvr.cn/addons?_plugin=sign_in&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
