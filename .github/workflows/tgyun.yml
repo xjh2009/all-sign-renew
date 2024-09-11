@@ -23,8 +23,8 @@ jobs:
         IFS=',' read -r -a upds <<< "$TGYUN_USERPASSWD"
 
         for upd in "${upds[@]}"; do
-          curl -c "ck.tgy" -X POST "https://cloud.tanggaoyun.cn/login?action=email" -d $upd
-          response=$(curl -b 'ck.tgy' 'https://cloud.tanggaoyun.cn/addons?_plugin=58&_controller=index&_action=qd' -X 'POST' -H 'x-requested-with: XMLHttpRequest')
+          curl -c "ck.tgy" -X POST "https://www.tanggaoyun.com/login?action=email" -d $upd
+          response=$(curl -b 'ck.tgy' 'https://www.tanggaoyun.com/addons?_plugin=58&_controller=index&_action=qd' -X 'POST' -H 'x-requested-with: XMLHttpRequest')
           rm -rf ck.tgy
           if echo "$response" | grep -q '"code":1'; then
             echo "签到成功"

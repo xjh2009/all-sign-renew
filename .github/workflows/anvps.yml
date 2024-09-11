@@ -22,7 +22,7 @@ jobs:
         uid_list=$(jq -r '.anvps[]' sign.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -X POST -d "uid=${uid}" "https://www.anvps.cn/addons?_plugin=sign_in&_controller=index&_action=index")
+          response=$(curl -s -X POST -d "uid=${uid}" -H "X-REAL-IP: 39.156.66.10" -x "http://149.88.91.36:80" "https://www.anvps.cn/addons?_plugin=sign_in&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
