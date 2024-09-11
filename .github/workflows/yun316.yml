@@ -29,6 +29,6 @@ jobs:
           echo "正在签到前两位为邮箱：${email:0:2}"
 
           curl -s -c "ck.yun316" -X POST "https://www.yun316.net/data/user.php?act=login" -d "email=$email&password=$password&remember=on" > /dev/null
-          curl -s -b "ck.yun316" -X POST "https://www.yun316.net/data/host.php?act=renew&id=$pid" -d "planid=$pid&m=1" | jq ".msg"
+          curl -s -b "ck.yun316" -X POST "https://www.yun316.net/data/host.php?act=renew&id=$pid" -d "planid=$pid&m=1" | jq -r ".msg"
           rm -rf ck.yun316
         done
