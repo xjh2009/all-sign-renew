@@ -1,13 +1,13 @@
-# 海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC/量芯云/灰狼云/岸云数据 自动签到/续费
+# 海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/复兴云 自动签到/续费
 
-使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC/量芯云/灰狼云/岸云数据<br>
+使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/山海云/泷奉云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/复兴云<br>
 
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 B站，抖音，名字不一，转载请注明作者<br>
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)
+各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[山海云](https://www.vpsvr.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[复兴云](https://www.revcloud.tech/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -26,15 +26,17 @@ Fork本项目<br>
 
 #### 添加续费任务
 岸云因为源站垃圾所以暂时搞不了 <br>
-sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东云)/shyidc(山海云)/lfyidc(泷奉云)/anvps(岸云数据)<br>
-示例，假设这五家IDC用户ID都为114514和123456就可以这样填
+sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东云)/shyidc(山海云)/lfyidc(泷奉云)/anvps(岸云数据)/fxidc(复兴云)<br>
+示例，假设这六家IDC用户ID都为114514和123456就可以这样填
 <br>
 ```json
 {
     "ddyidc": [114514,123456],    
     "lfyidc": [114514,123456],
     "yfidc": [114514,123456],
-    "shyidc": [114514,123456]
+    "anvps": [114514,123456],
+    "shyidc": [114514,123456],
+    "fxidc": [114514,123456]
 }
 ```
 文件提交后，自动进入Github Action构建
