@@ -22,7 +22,7 @@ jobs:
         uid_list=$(jq -r '.ddyidc[]' sign.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -X POST -d "uid=${uid}" "https://dadongyun.top/addons?_plugin=sign_in&_controller=index&_action=index")
+          response=$(curl -s -X POST -d "uid=${uid}" "https://dadongyun.com/addons?_plugin=26&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
