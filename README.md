@@ -4,7 +4,9 @@
 
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 B站，抖音，名字不一，转载请注明作者<br>
+## 战绩可查
 ![糖糕云沃错了](https://github.com/user-attachments/assets/056e82a1-b24c-4f9b-850e-6634355cd9f7)
+![v安慕希沃搓了](https://github.com/user-attachments/assets/40660395-2829-4738-ad8e-55a60cffb503)
 
 ## Tips
 
