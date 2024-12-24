@@ -5,7 +5,7 @@ on:
     branches:
       - main
   schedule:
-    - cron: '0 20 * * *'
+    - cron: '0 4 * * *' #没见过这么der的网站 4点运行会报错502
   workflow_dispatch:
 
 jobs:
