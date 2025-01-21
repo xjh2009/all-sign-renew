@@ -2,10 +2,14 @@
 
 使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机<br>
 
+本项目由幻心互联[2mc.shop](https://app.2mc.shop/_XJHya)自己开发自己赞助 
+
 作者：**[XJHya](https://github.com/xjh2009)**<br>
-B站，抖音，名字不一，转载请注明作者<br>
+
 ## 战绩可查
 迈快恋姬劳总 你这签到还没隔壁WeMC难度高啊
+
+![QQ20250122-012610](https://github.com/user-attachments/assets/43c7c1d5-b185-4648-b65a-c7b0c49e4ebe)
 ![糖糕云沃错了](https://github.com/user-attachments/assets/056e82a1-b24c-4f9b-850e-6634355cd9f7)
 ![v安慕希沃搓了](https://github.com/user-attachments/assets/40660395-2829-4738-ad8e-55a60cffb503)
 ![迈快恋姬倭厝叻](https://github.com/user-attachments/assets/ba0367f2-e0f7-4d56-bef9-bc60305583ad)
