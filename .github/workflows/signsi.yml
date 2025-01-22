@@ -21,8 +21,8 @@ jobs:
         SS_USERPASSWD: ${{ secrets.SS_USERPASSWD }}
         GOOGLE_AISTUDIO: ${{ secrets.GOOGLE_AISTUDIO }}
       run: |
-        # 分割 MK_USERPASSWD 并按逗号解析为数组
-        IFS=',' read -r -a entries <<< "$MK_USERPASSWD"
+        # 分割 SS_USERPASSWD 并按逗号解析为数组
+        IFS=',' read -r -a entries <<< "$SS_USERPASSWD"
 
         # 遍历每一组 user_phone|user_passwd|user_service 数据
         for entry in "${entries[@]}"; do
