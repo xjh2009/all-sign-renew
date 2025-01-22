@@ -1,0 +1,81 @@
+name: 自动签到续费辰隙互联
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 4 * * *' #没见过这么der的网站 4点运行会报错502
+  workflow_dispatch:
+
+jobs:
+  read-and-access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: 签到续费辰隙互联
+      env:
+        SS_USERPASSWD: ${{ secrets.SS_USERPASSWD }}
+        GOOGLE_AISTUDIO: ${{ secrets.GOOGLE_AISTUDIO }}
+      run: |
+        # 分割 MK_USERPASSWD 并按逗号解析为数组
+        IFS=',' read -r -a entries <<< "$MK_USERPASSWD"
+
+        # 遍历每一组 user_phone|user_passwd|user_service 数据
+        for entry in "${entries[@]}"; do
+          IFS='|' read -r user_phone user_passwd user_service <<< "$entry"
+
+          echo "正在处理用户 ID: $user_phone"
+          # 获取验证码
+          curl -s -c 'singsi.ck' https://www.singsi.cn/Singsi_Tools/S_captcha.php -o "S_captcha.png"
+          # 计算验证码
+          ocr=$(curl -s -X POST https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash-exp:generateContent?key=${GOOGLE_AISTUDIO} \
+                -H 'Content-Type: application/json' \
+                -d '{
+                    "contents": [
+                      {
+                        "role": "user",
+                        "parts": [
+                          {
+                            "inline_data": {
+                              "mime_type":"image/jpeg",
+                              "data": "'$(base64 -w0 S_captcha.png)'"
+                            }
+                          },
+                          {
+                            "text": "ocr photo"
+                          }
+                        ]
+                      }
+                    ],
+                    "generationConfig": {
+                    "temperature": 1,
+                    "topK": 64,
+                    "topP": 0.95,
+                    "maxOutputTokens": 8192,
+                    "responseMimeType": "text/plain"
+                  }
+                }')
+          acode=$(echo $ocr | jq -r '.candidates[0].content.parts[0].text | gsub("[ -]"; "")')
+          echo "验证码"
+          echo $acode
+          # 登录请求
+          curl -s -b 'singsi.ck' 'https://www.singsi.cn/Singsi_logchk.php' \
+          -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0' \
+          -H 'x-requested-with: XMLHttpRequest' \
+          --data-raw "phone=$user_phone&password=$user_passwd&vcode=$acode&rememberme=false"
+          # 签到请求
+          response=$(curl -s -b 'singsi.ck' 'https://www.singsi.cn/SuperControl/Api/bonus_get/sign_in.php' \
+            -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0' \
+            -H 'x-requested-with: XMLHttpRequest')
+          if echo "$response" | grep -q '"code":1'; then
+            echo "续费成功"
+          else
+            echo "续费失败，内容返回: $response"
+          fi
+          #续费请求
+          curl -b 'singsi.ck' 'https://www.singsi.cn/Singsi_Pay/bonus/Api/renewal.php' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0' --data-urlencode "trade_type=renewal" --data-urlencode "ServerIP=$user_service" --data-urlencode "days=1"
+        done
