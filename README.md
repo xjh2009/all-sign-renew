@@ -1,6 +1,6 @@
-# 海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机 自动签到/续费
+# 海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机/辰隙互联 自动签到/续费
 
-使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机<br>
+使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机/辰隙互联<br>
 
 本项目由幻心互联[2mc.shop](https://app.2mc.shop/_XJHya)自己开发自己赞助 
 
@@ -16,7 +16,7 @@
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[麦块联机](https://minekuai.com/)
+各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[麦块联机](https://minekuai.com/)/[辰隙互联](https://www.singsi.cn/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -129,6 +129,18 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 例子
 ```
 用户ID1:服务器ID1:服务器单日续费价格1,用户ID2:服务器ID2:服务器单日续费价格2
+```
+### 8.辰隙互联
+
+#### 配置环境变量
+进入Settings->Secret and variables->Actions->New Repository secret<br>
+将你的Name输入SS_USERPASSWD<br>
+将你的Secret输入账户密码和服务器ID<br>
+将你的Name输入GOOGLE_AISTUDIO<br>
+将你的Secret输入[AI Studio](https://aistudio.google.com/apikey)的APIKEY<br>
+例子
+```
+手机号1|密码1|服务器IP地址2,手机号2|密码2|服务器IP地址2
 ```
 配置成环境变量
 
