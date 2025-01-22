@@ -28,7 +28,8 @@ jobs:
         for entry in "${entries[@]}"; do
           IFS='|' read -r user_phone user_passwd user_service <<< "$entry"
 
-          echo "正在处理用户 ID: $user_phone"
+          echo "正在签到前三位为手机号：${user_phone:0:3}"
+          
           # 获取验证码
           curl -s -c 'singsi.ck' https://www.singsi.cn/Singsi_Tools/S_captcha.php -o "S_captcha.png"
           # 计算验证码
