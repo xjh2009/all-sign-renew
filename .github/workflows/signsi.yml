@@ -69,14 +69,9 @@ jobs:
           -H 'x-requested-with: XMLHttpRequest' \
           --data-raw "phone=$user_phone&password=$user_passwd&vcode=$acode&rememberme=false"
           # 签到请求
-          response=$(curl -s -b 'singsi.ck' 'https://www.singsi.cn/SuperControl/Api/bonus_get/sign_in.php' \
+          curl -s -b 'singsi.ck' 'https://www.singsi.cn/SuperControl/Api/bonus_get/sign_in.php' \
             -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0' \
-            -H 'x-requested-with: XMLHttpRequest')
-          if echo "$response" | grep -q '"code":1'; then
-            echo "续费成功"
-          else
-            echo "续费失败，内容返回: $response"
-          fi
+            -H 'x-requested-with: XMLHttpRequest'
           #续费请求
           curl -b 'singsi.ck' 'https://www.singsi.cn/Singsi_Pay/bonus/Api/renewal.php' -H 'user-agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36 Edg/131.0.0.0' --data-urlencode "trade_type=renewal" --data-urlencode "ServerIP=$user_service" --data-urlencode "days=1"
         done
