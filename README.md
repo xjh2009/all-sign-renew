@@ -7,12 +7,24 @@
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 
 ## 战绩可查
+<details>
+<summary>此部分已折叠</summary>
+
 迈快恋姬劳总 你这签到还没隔壁WeMC难度高啊
 
 ![QQ20250122-012610](https://github.com/user-attachments/assets/43c7c1d5-b185-4648-b65a-c7b0c49e4ebe)
 ![糖糕云沃错了](https://github.com/user-attachments/assets/056e82a1-b24c-4f9b-850e-6634355cd9f7)
 ![v安慕希沃搓了](https://github.com/user-attachments/assets/40660395-2829-4738-ad8e-55a60cffb503)
 ![迈快恋姬倭厝叻](https://github.com/user-attachments/assets/ba0367f2-e0f7-4d56-bef9-bc60305583ad)
+![eb01a45950b6b71cdb4b01a4dc1da757](https://github.com/user-attachments/assets/61337054-3f1c-4683-97e0-b62ce11b9dcc)
+</details>
+<details>
+<summary>一些小作文</summary>
+
+昨天灰狼云来找我了但是他也没封我号还是挺不错的 不像某厂商上来就威胁 要不然就直接开骂
+
+冷知识早在前几天麦块联机就把我号封了
+</details>
 
 ## Tips
 
