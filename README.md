@@ -11,7 +11,6 @@
 
 <summary>此部分已折叠</summary>
 
-迈快恋姬劳总 你这签到还没隔壁WeMC难度高啊
 
 ![QQ20250122-012610](https://github.com/user-attachments/assets/43c7c1d5-b185-4648-b65a-c7b0c49e4ebe)
 ![糖糕云沃错了](https://github.com/user-attachments/assets/056e82a1-b24c-4f9b-850e-6634355cd9f7)
@@ -22,16 +21,19 @@
 
 
 <details>
-<summary>一些小作文</summary>
+<summary>超级战绩</summary>
 
-昨天灰狼云来找我了但是他也没封我号还是挺不错的 不像某厂商上来就威胁 要不然就直接开骂
+Wemc双毕业
+麦块联机双毕业
+海绵联机B站毕业
+糖糕云账户毕业
 
-冷知识早在前几天麦块联机就把我号封了
+
 </details>
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[麦块联机](https://minekuai.com/)/[辰隙互联](https://www.singsi.cn/)
+各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[麦块联机](https://minekuai.com/)/[辰隙互联](https://www.singsi.cn/)/[鱼乐云](https://www.ueidc.cn/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -150,10 +152,14 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
 将你的Name输入MK_TOKENS<br>
-将你的Secret输入Playload encrypt-key和主机ID<br>
-例子
+将你的Secret输入Playload encrypt-key和实例ID<br>
+将你的Name输入MK_CLIENTID<br>
+将你的Secret输入clientid<br>
+因为有的人可能不懂我过几天写个网页做个获取<br>
+
+MK_TOKENS例子
 ```
-Playload1:encrypt-key1:服务器ID1,Playload2:encrypt-key2:服务器ID2
+Playload1:encrypt-key1:实例id1,Playload2:encrypt-key2:实例id2
 ```
 ### 6.辰隙互联
 
