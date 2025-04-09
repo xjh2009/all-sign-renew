@@ -25,7 +25,7 @@ jobs:
 
         for entry in "${entries[@]}"; do
           IFS=':' read -r playload encryptkey server <<< "$entry"
-          echo "正在处理服务器 ID: $server"
+          #echo "正在处理服务器 ID: $server"
 
           echo "正在尝试登录..."
           login_response=$(curl -s 'https://api.minekuai.com/auth/pterodactylLogin' \
