@@ -1,11 +1,8 @@
 name: 自动签到续费麦块联机
 
 on:
-  push:
-    branches:
-      - main
   schedule:
-    - cron: '0 4 * * *' #没见过这么der的网站 4点运行会报错502
+    - cron: '0 4 * * *' # 每天 4 点运行
   workflow_dispatch:
 
 jobs:
@@ -18,36 +15,63 @@ jobs:
 
     - name: 签到续费麦块联机
       env:
-        MK_USERPASSWD: ${{ secrets.MK_USERPASSWD }}
+        MK_TOKENS: ${{ secrets.MK_TOKENS }}
+        MK_CLIENTID: ${{ secrets.MK_CLIENTID }}
       run: |
-        # 分割 MK_USERPASSWD 并按逗号解析为数组
-        IFS=',' read -r -a entries <<< "$MK_USERPASSWD"
+        #!/bin/bash
+        set -e
 
-        # 遍历每一组 user_id:server_id:prices 数据
+        IFS=',' read -r -a entries <<< "$MK_TOKENS"
+
         for entry in "${entries[@]}"; do
-          IFS=':' read -r user_id server_id prices <<< "$entry"
+          IFS=':' read -r playload encryptkey server <<< "$entry"
+          echo "正在处理服务器 ID: $server"
 
-          echo "正在处理用户 ID: $user_id, 服务器 ID: $server_id, 价格: $prices"
+          echo "正在尝试登录..."
+          login_response=$(curl -s 'https://api.minekuai.com/auth/pterodactylLogin' \
+            -H "accept: application/json, text/plain, */*" \
+            -H "clientid: $MK_CLIENTID" \
+            -H "content-language: zh_CN" \
+            -H "content-type: application/json;charset=UTF-8" \
+            -H "encrypt-key: $encryptkey" \
+            -H "isencrypt: true" \
+            -H "istoken: false" \
+            -H "origin: https://minekuai.com" \
+            -H "user-agent: Mozilla/5.0" \
+            --data-raw "$playload")
 
-          # 签到请求
-          response=$(curl -s 'https://api.ungc.com.cn/api/minekuai/points/signIn' \
-            -H 'content-type: application/json' \
-            --data "${user_id}")
+          access_token=$(echo "$login_response" | jq -r '.data.access_token')
+          msg_login=$(echo "$login_response" | jq -r '.msg')
 
-          if echo "$response" | grep -q '"code":1'; then
-            echo "签到成功"
-          else
-            echo "签到失败，内容返回: $response"
+          if [[ "$access_token" == "null" || -z "$access_token" ]]; then
+            echo "❌ 登录失败：$msg_login"
+            continue
           fi
 
-          # 续费请求
-          response=$(curl -s 'https://api.ungc.com.cn/api/minekuai/modifyServerSuspendTime/' \
-            -H 'content-type: application/json' \
-            --data "{\"user_id\":${user_id},\"server_id\":${server_id},\"days\":1,\"prices\":${prices}}")
+          echo "✅ 登录成功，开始签到..."
 
-          if echo "$response" | grep -q '"code":1'; then
-            echo "续费成功"
-          else
-            echo "续费失败，内容返回: $response"
-          fi
+          sign_response=$(curl -s 'https://api.minekuai.com/system/sign' \
+            -H "authorization: Bearer $access_token" \
+            -H "clientid: $MK_CLIENTID" \
+            -H "content-language: zh_CN" \
+            -H "origin: https://minekuai.com" \
+            -H "user-agent: Mozilla/5.0")
+
+          msg_sign=$(echo "$sign_response" | jq -r '.msg')
+          echo "📌 签到结果：$msg_sign"
+
+          echo "正在尝试续费服务器 $server..."
+
+          renew_response=$(curl -s -X POST "https://api.minekuai.com/system/mineKuaiSystem/reNewInstance?serverId=$server&days=1" \
+            -H "authorization: Bearer $access_token" \
+            -H "clientid: $MK_CLIENTID" \
+            -H "content-language: zh_CN" \
+            -H "origin: https://minekuai.com" \
+            -H "user-agent: Mozilla/5.0")
+
+          msg_renew=$(echo "$renew_response" | jq -r '.msg')
+          echo "🔄 续费结果：$msg_renew"
+
+          echo "处理完成 ✅"
+          echo "---------------------------------------"
         done
