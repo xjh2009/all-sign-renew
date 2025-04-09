@@ -1,9 +1,6 @@
 name: 自动签到鱼乐云
 
 on:
-  push:
-    branches:
-      - main
   schedule:
     - cron: '0 6 * * *'
   workflow_dispatch:
@@ -30,12 +27,12 @@ jobs:
           echo "正在处理用户 ID: $username"
           
           login_header_tmp=$(mktemp)
-          curl -s -D "$login_header_tmp" -c ueidc.ck -H "Content-Type: application/json" -X POST https://www.ueidc.cn/gw/common/auth/login -d '{"username":"${username}","password":"${password}"}' > /dev/null
+          curl -s -D "$login_header_tmp" -c ueidc.ck -H "Content-Type: application/json" -X POST https://www.ueidc.cn/gw/common/auth/login -d "{\"username\":\"$username\",\"password\":\"$password\"}" > /dev/null
 
           token=$(grep -i "yl-token:" "$login_header_tmp" | awk '{print $2}' | tr -d '\r')
           sign_response=$(curl -s -b ueidc.ck -H "yl-token: $token" https://www.ueidc.cn/cloud-product/api/userSign/sign)
           message=$(echo "$sign_response" | grep -o '"message":"[^"]*"' | cut -d':' -f2 | tr -d '"')
-          reward_value=$(echo "$sign_response" | grep -o '"rewardValuee":"[^"]*"' | cut -d':' -f2)
+          reward_value=$(echo "$sign_response" | grep -o '"rewardValue":"[^"]*"' | cut -d':' -f2)
           echo "返回: $message"
           echo "积分数据: $reward_value"
           rm -f "$login_header_tmp" ueidc.ck
