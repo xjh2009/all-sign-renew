@@ -1,0 +1,43 @@
+name: 自动签到鱼乐云
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
+
+jobs:
+  read-and-access:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: 签到鱼乐云
+      env:
+        UEIDC_USERPASSWD: ${{ secrets.UEIDC_USERPASSWD }}
+      run: |
+        # 分割 UEIDC_USERPASSWD 并按逗号解析为数组
+        IFS=',' read -r -a entries <<< "$UEIDC_USERPASSWD"
+
+        # 遍历每一组 username:password 数据
+        for entry in "${entries[@]}"; do
+          IFS='|' read -r username password <<< "$entry"
+
+          echo "正在处理用户 ID: $username"
+          response=$(curl -s -c ueidc.ck -H "Content-Type: application/json" -X POST https://www.ueidc.cn/gw/common/auth/login -d '{"username":"${username}","password":"${password}"}')
+
+          token=$(echo "$response" | grep -o '"yl-token":"[^"]*"' | cut -d':' -f2 | tr -d '"')
+
+          sign_response=$(curl -s -b ueidc.c -H "yl-token: $token" https://www.ueidc.cn/cloud-product/api/userSign/sign)
+
+          message=$(echo "$sign_response" | grep -o '"message":"[^"]*"' | cut -d':' -f2 | tr -d '"')
+          reward_value=$(echo "$sign_response" | grep -o '"rewardValue":[0-9]*' | cut -d':' -f2)
+
+          echo "返回: $message"
+          echo "积分数据: $reward_value"
+          rm -rf ueidc.ck
+        done
