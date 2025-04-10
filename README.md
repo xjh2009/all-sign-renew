@@ -155,7 +155,7 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 将你的Secret输入Playload encrypt-key和实例ID<br>
 将你的Name输入MK_CLIENTID<br>
 将你的Secret输入clientid<br>
-因为有的人可能不懂我过几天写个网页做个获取<br>
+具体获取方法请前往https://github.com/xjh2009/qnmdmk<br>
 
 MK_TOKENS例子
 ```
