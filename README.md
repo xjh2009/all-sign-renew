@@ -101,7 +101,7 @@ test1@test1.com:password1,test2@test2.com:password2
 #### 添加续费任务
 岸云因为源站垃圾所以暂时搞不了 <br>
 sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东云)/anvps(岸云数据)<br>
-示例，假设这三家IDC用户ID都为114514和123456就可以这样填
+示例，假设这三家IDC用户ID都为`114514`和`123456`就可以这样填
 <br>
 ```json
 {
@@ -116,7 +116,7 @@ sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东�
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入HMLJ_USERPASSWD<br>
+将你的Name输入`HMLJ_USERPASSWD`<br>
 将你的Secret输入用户名密码<br>
 例子
 ```
@@ -129,7 +129,7 @@ email=test1@test1.com&password=password1,email=test2@test2.com&password=password
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入LXVH_USERPASSWD<br>
+将你的Name输入`LXVH_USERPASSWD`<br>
 将你的Secret输入账户密码<br>
 例子
 ```
@@ -141,7 +141,7 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入YUN316_USERPASSWD<br>
+将你的Name输入`YUN316_USERPASSWD`<br>
 将你的Secret输入账户密码和主机ID<br>
 例子
 ```
@@ -151,9 +151,9 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入MK_TOKENS<br>
+将你的Name输入`MK_TOKENS`<br>
 将你的Secret输入Playload encrypt-key和实例ID<br>
-将你的Name输入MK_CLIENTID<br>
+将你的Name输入`MK_CLIENTID`<br>
 将你的Secret输入clientid<br>
 具体获取方法请前往https://github.com/xjh2009/qnmdmk<br>
 
@@ -165,9 +165,9 @@ Playload1:encrypt-key1:实例id1,Playload2:encrypt-key2:实例id2
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入SS_USERPASSWD<br>
+将你的Name输入`SS_USERPASSWD`<br>
 将你的Secret输入账户密码和服务器ID<br>
-将你的Name输入GOOGLE_AISTUDIO<br>
+将你的Name输入`GOOGLE_AISTUDIO`<br>
 将你的Secret输入[AI Studio](https://aistudio.google.com/apikey)的APIKEY<br>
 例子
 ```
@@ -179,7 +179,7 @@ Playload1:encrypt-key1:实例id1,Playload2:encrypt-key2:实例id2
 
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
-将你的Name输入UEIDC_USERPASSWD<br>
+将你的Name输入`UEIDC_USERPASSWD`<br>
 将你的Secret输入账户密码<br>
 Tips:因为他们续费服务器的接口还是太丑了 所以只做签到
 例子
