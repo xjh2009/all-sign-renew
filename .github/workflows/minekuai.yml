@@ -25,7 +25,6 @@ jobs:
 
         for entry in "${entries[@]}"; do
           IFS=':' read -r playload encryptkey server <<< "$entry"
-          #echo "正在处理服务器 ID: $server"
 
           echo "正在尝试登录..."
           login_response=$(curl -s 'https://api.minekuai.com/auth/pterodactylLogin' \
@@ -60,7 +59,7 @@ jobs:
           msg_sign=$(echo "$sign_response" | jq -r '.msg')
           echo "📌 签到结果：$msg_sign"
 
-          echo "正在尝试续费服务器 $server..."
+          echo "正在尝试续费服务器"
 
           renew_response=$(curl -s -X POST "https://api.minekuai.com/system/mineKuaiSystem/reNewInstance?serverId=$server&days=1" \
             -H "authorization: Bearer $access_token" \
