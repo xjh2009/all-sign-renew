@@ -152,14 +152,11 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 #### 配置环境变量
 进入Settings->Secret and variables->Actions->New Repository secret<br>
 将你的Name输入`MK_TOKENS`<br>
-将你的Secret输入Playload encrypt-key和实例ID<br>
-将你的Name输入`MK_CLIENTID`<br>
-将你的Secret输入clientid<br>
-具体获取方法请前往https://github.com/xjh2009/qnmdmk<br>
+将你的Secret输入用户名密码和实例ID<br>
 
 MK_TOKENS例子
 ```
-Playload1:encrypt-key1:实例id1,Playload2:encrypt-key2:实例id2
+用户名1:密码1:实例id1,用户名2:密码2:实例id2
 ```
 ### 6.辰隙互联
 
