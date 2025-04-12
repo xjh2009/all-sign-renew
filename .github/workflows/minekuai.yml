@@ -12,11 +12,36 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.10'
 
+    - name: Install dependencies
+      run: |
+        sudo apt-get update
+        sudo apt-get install -y \
+          wget \
+          libnss3 \
+          libxss1 \
+          libasound2 \
+          libx11-xcb1 \
+          libxcomposite1 \
+          libxcursor1 \
+          libxdamage1 \
+          libxrandr2 \
+          libgbm1 \
+          libgtk-3-0   
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo dpkg -i google-chrome-stable_current_amd64.deb || sudo apt-get install -f -y
+        python -m ensurepip --upgrade  # 确保 pip 已安装
+        pip install -U pip
+        pip install -r requirements.txt 
+        
     - name: 签到续费麦块联机
       env:
         MK_TOKENS: ${{ secrets.MK_TOKENS }}
-        MK_CLIENTID: ${{ secrets.MK_CLIENTID }}
       run: |
         #!/bin/bash
         set -e
@@ -24,34 +49,25 @@ jobs:
         IFS=',' read -r -a entries <<< "$MK_TOKENS"
 
         for entry in "${entries[@]}"; do
-          IFS=':' read -r playload encryptkey server <<< "$entry"
+          IFS=':' read -r user password server <<< "$entry"
+          cd minekuai
+          echo "🔍 正在尝试登录..."
+          python main.py --username $user --password $password
+          #检查 local.s 是否有内容，如果没有则表示登录失败
 
-          echo "正在尝试登录..."
-          login_response=$(curl -s 'https://api.minekuai.com/auth/pterodactylLogin' \
-            -H "accept: application/json, text/plain, */*" \
-            -H "clientid: $MK_CLIENTID" \
-            -H "content-language: zh_CN" \
-            -H "content-type: application/json;charset=UTF-8" \
-            -H "encrypt-key: $encryptkey" \
-            -H "isencrypt: true" \
-            -H "istoken: false" \
-            -H "origin: https://minekuai.com" \
-            -H "user-agent: Mozilla/5.0" \
-            --data-raw "$playload")
-
-          access_token=$(echo "$login_response" | jq -r '.data.access_token')
-          msg_login=$(echo "$login_response" | jq -r '.msg')
-
-          if [[ "$access_token" == "null" || -z "$access_token" ]]; then
-            echo "❌ 登录失败：$msg_login"
+          if [ ! -s local.s ]; then
+            echo "❌ 登录失败，local.s 文件为空！请检查用户名和密码。"
             continue
           fi
 
-          echo "✅ 登录成功，开始签到..."
+          access_token=$(cat local.s)
+          user_agent=$(cat u.a)
 
+          # 签到
+          echo "✅ 登录成功，开始签到..."
           sign_response=$(curl -s 'https://api.minekuai.com/system/sign' \
             -H "authorization: Bearer $access_token" \
-            -H "clientid: $MK_CLIENTID" \
+            -H "clientid: 3991ee92fe77fa9672e5eca721151dab" \
             -H "content-language: zh_CN" \
             -H "origin: https://minekuai.com" \
             -H "user-agent: Mozilla/5.0")
@@ -59,18 +75,20 @@ jobs:
           msg_sign=$(echo "$sign_response" | jq -r '.msg')
           echo "📌 签到结果：$msg_sign"
 
-          echo "正在尝试续费服务器"
-
+          # 续费
+          echo "🔄 正在尝试续费服务器..."
           renew_response=$(curl -s -X POST "https://api.minekuai.com/system/mineKuaiSystem/reNewInstance?serverId=$server&days=1" \
             -H "authorization: Bearer $access_token" \
-            -H "clientid: $MK_CLIENTID" \
+            -H "clientid: 3991ee92fe77fa9672e5eca721151dab" \
             -H "content-language: zh_CN" \
             -H "origin: https://minekuai.com" \
             -H "user-agent: Mozilla/5.0")
-
+          
+          rm -rf u.a local.s
+          
           msg_renew=$(echo "$renew_response" | jq -r '.msg')
           echo "🔄 续费结果：$msg_renew"
 
-          echo "处理完成 ✅"
+          echo "✅ 处理完成！"
           echo "---------------------------------------"
         done
