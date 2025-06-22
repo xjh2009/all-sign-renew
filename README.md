@@ -37,7 +37,7 @@ Wemc双毕业
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
-~~https://xjh2009.github.io/mkfl/ 获取麦块联机文件的直链~~
+~~已修复~~ https://xjh2009.github.io/mkfl/ 获取麦块联机文件的直链
 
 我不需要XXX的签到/续费: <br>
 进入Actions->左侧选择你不需要的->最右侧三个点->Disable workflow
@@ -153,7 +153,8 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 进入Settings->Secret and variables->Actions->New Repository secret<br>
 将你的Name输入`MK_TOKENS`<br>
 将你的Secret输入用户名密码和实例ID<br>
-
+将你的Name输入`GOOGLE_AISTUDIO`<br>
+将你的Secret输入[AI Studio](https://aistudio.google.com/apikey)的APIKEY<br>
 MK_TOKENS例子
 ```
 用户名1:密码1:实例id1,用户名2:密码2:实例id2
