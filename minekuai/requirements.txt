@@ -1,2 +1,3 @@
 DrissionPage
-fake_useragent
+fake-useragent
+google-genai
