@@ -58,3 +58,5 @@ jobs:
           python main.py --username $user --password $password --gapi "$GOOGLE_AISTUDIO"
 
         done
+        rm -f *temp*
+
