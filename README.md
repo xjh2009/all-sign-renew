@@ -157,7 +157,7 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 将你的Secret输入[AI Studio](https://aistudio.google.com/apikey)的APIKEY<br>
 MK_TOKENS例子
 ```
-用户名1:密码1:实例id1,用户名2:密码2:实例id2
+用户名1:密码1,用户名2:密码2
 ```
 ### 6.辰隙互联
 
