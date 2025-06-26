@@ -156,7 +156,7 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 将你的Name输入`MK_TOKENS`<br>
 将你的Secret输入用户名密码<br>
 将你的Name输入`MK_ONEBOT`<br>
-将你的Secret输入OneBOT地址 如果没有我推荐使用[NapCat](https://napcat.napneko.icu/)搭建 目前看应该是可以单个QQ签到多个账户的
+将你的Secret输入OneBOT地址`https://mybot.bro.me` 推荐加上https防止被抓包获取KEY 如果没有我推荐使用[NapCat](https://napcat.napneko.icu/)搭建 目前看应该是可以单个QQ签到多个账户的
 <br>将你的Name输入`MK_ONEBOT_KEY`<br>
 将你的Secret输入OneBOT的APIkey<br>
 将你的Name输入`GOOGLE_AISTUDIO`<br>
