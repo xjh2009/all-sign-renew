@@ -45,6 +45,8 @@ jobs:
       env:
         MK_TOKENS: ${{ secrets.MK_TOKENS }}
         GOOGLE_AISTUDIO: ${{ secrets.GOOGLE_AISTUDIO }}
+        MK_ONEBOT: ${{ secrets.MK_ONEBOT }}
+        MK_ONEBOT_KEY: ${{ secrets.MK_ONEBOT_KEY }}
       run: |
         #!/bin/bash
         set -e
@@ -55,7 +57,7 @@ jobs:
           IFS=':' read -r user password <<< "$entry"
           cd minekuai
           echo "🔍 正在尝试签到..."
-          python main.py --username $user --password $password --gapi "$GOOGLE_AISTUDIO"
+          python main.py --username $user --password $password --gapi "$GOOGLE_AISTUDIO" --onebot "$MK_ONEBOT" --onebotkey "$MK_ONEBOT_KEY"
 
         done
         rm -f *temp*
