@@ -13,10 +13,12 @@ parser = argparse.ArgumentParser(description="UserPwd?")
 parser.add_argument('--username', type=str, required=True, help="The username")
 parser.add_argument('--password', type=str, required=True, help="The password")
 parser.add_argument('--onebot', type=str, required=True, help="The onebot api")
+parser.add_argument('--onebotkey', type=str, required=True, help="The onebot apikey")
 parser.add_argument('--gapi', type=str, required=True, help="The Google AI Studio API Key")
 args = parser.parse_args()
 ua = UserAgent()
 ONEBOT_URL = args.onebot #ONEBOT API 地址
+ONEBOT_KEY = args.onebotkey #ONEBOT API 地址
 arguments = [
     "-no-first-run",
     "-force-color-profile=srgb",
@@ -173,8 +175,9 @@ def sign_in(page, result):
 # ———————— OneBot 工具函数 ————————
 def send_group_msg(msg: str):
     try:
+        ONEBOT_KEY
         r = requests.post(
-            f"{ONEBOT_URL}/send_group_msg",
+            f"{ONEBOT_URL}/send_group_msg?access_token={ONEBOT_KEY}",
             json={"group_id": GROUP_ID, "message": msg},
             timeout=5,
         )
