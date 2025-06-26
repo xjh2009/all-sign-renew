@@ -1,21 +1,22 @@
 from DrissionPage import ChromiumPage, ChromiumOptions
 from DrissionPage.common import Keys
 from fake_useragent import UserAgent
-import argparse
-import time
-import base64
+import argparse, time, base64, requests, re
 from google import genai
 from google.genai import types
 #重试次数 不建议多5此就行 一个api tokens一天30次多了就收费
 max_retry = 3
+GROUP_ID   = 1004540380 #群号 你自己设吧 机器人在那个群就用那个
 
 retry_count = 0
 parser = argparse.ArgumentParser(description="UserPwd?")
 parser.add_argument('--username', type=str, required=True, help="The username")
 parser.add_argument('--password', type=str, required=True, help="The password")
+parser.add_argument('--onebot', type=str, required=True, help="The onebot api")
 parser.add_argument('--gapi', type=str, required=True, help="The Google AI Studio API Key")
 args = parser.parse_args()
 ua = UserAgent()
+ONEBOT_URL = args.onebot #ONEBOT API 地址
 arguments = [
     "-no-first-run",
     "-force-color-profile=srgb",
@@ -28,7 +29,7 @@ arguments = [
     "-enable-features=NetworkService,NetworkServiceInProcess,LoadCryptoTokenExtension,PermuteTLSExtensions",
     "-disable-features=FlashDeprecationWarning,EnablePasswordsAccountStorage",
     "-deny-permission-prompts",
-    #"-disable-gpu",
+    "-disable-gpu",
     "-accept-lang=zh-CN",
     "--user-agent="+ua.chrome
     #"--user-agent=Minekuai-AutoSignin/2.0 (Devby:Huanxin) (https://github.com/xjh2009/all-sign-renew/tree/main/minekuai)"
@@ -39,12 +40,10 @@ for arg in arguments:
     options.set_argument(arg)
 options.mute(True)
 options.incognito() #隐私
-#options.headless() #无头
+options.headless() #无头
 browser = ChromiumPage(addr_or_opts=options)
-#page = browser.get_tab(1)
-#page2 = browser.new_tab()
-page2 = browser.get_tab(1)
-page = browser.new_tab()
+page = browser.get_tab(1)
+page2 = browser.new_tab()
 page.get('https://minekuai.com/index/login')
 
 # 登录操作
@@ -157,16 +156,45 @@ def sign_in(page, result):
 
     try:
         body = res.response.body
-        print(body)
-        if body['code'] == 200:
-            print("✅ 签到成功:", body['msg'])
+        if body.get("code") == 200:
+            print("✅ 签到成功：", body["msg"])
             return True
-        else:
-            print("❌ 签到失败:", body['msg'])
+
+        msg = body.get("msg", "")
+        print("❌ 签到失败：", msg)
+
+        # 新增：自动解析并发送验证指令
+        if (cmd := parse_verify_cmd(msg)):
+            print("⚠️ 检测到需验证，自动发送指令 →", cmd)
+            return send_group_msg(cmd)
     except Exception as e:
         print("响应解析失败:", e)
     return False
+# ———————— OneBot 工具函数 ————————
+def send_group_msg(msg: str):
+    try:
+        r = requests.post(
+            f"{ONEBOT_URL}/send_group_msg",
+            json={"group_id": GROUP_ID, "message": msg},
+            timeout=5,
+        )
+        if r.status_code == 200 and r.json().get("status") == "ok":
+            print(f"✅ 已向群 {GROUP_ID} 发送：{msg}")
+            return True
+        else:
+            print("⚠️ 发送群消息失败：", r.text)
+            return False
+    except Exception as e:
+        print("⚠️ OneBot 调用异常：", e)
+def parse_verify_cmd(msg: str) -> str | None:
 
+    if "请到官方QQ群发送命令" not in msg:
+        return None
+    m = re.search(r"[命令|command][：:]\s*(.+)$", msg)
+    if not m:
+        return None
+    cmd = re.sub(r"\s+", "", m.group(1))
+    return cmd if cmd.startswith(".") else None
 # 主逻辑循环
 while retry_count < max_retry:
     print(f"第 {retry_count + 1} 次尝试识别验证码并签到")
@@ -184,3 +212,6 @@ while retry_count < max_retry:
 
 if retry_count >= max_retry:
     print("❌ 达到最大重试次数，签到失败")
+    browser.quit()
+    
+browser.quit()
