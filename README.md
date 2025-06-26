@@ -151,7 +151,7 @@ test1@test1.com:password1:产品ID1,test2@test2.com:password2:产品ID1
 
 #### 配置环境变量
 ### 麦块你还是别开了 从网站切到机器人您是这个👍👍👍👍
-因为网络问题直接使用海外IP部署NapCat会导致你的QQ出现无法登录风控等问题
+因为网络问题直接使用海外IP部署NapCat会导致你的QQ出现无法登录风控等问题<br>
 进入Settings->Secret and variables->Actions->New Repository secret<br>
 将你的Name输入`MK_TOKENS`<br>
 将你的Secret输入用户名密码<br>
