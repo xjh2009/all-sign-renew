@@ -2,7 +2,7 @@
 
 使用Github Action自动签到/续费海绵联机/雨云/优丰互联/大东云/糖糕云/WeMC/量芯云/灰狼云/岸云数据/麦块联机/辰隙互联/鱼乐云<br>
 
-本项目由幻心互联[2mc.shop](https://app.2mc.shop/_XJHya)自己开发自己赞助 
+本项目由幻心互联[2mc.shop](https://www.2mc.shop/)自己开发自己赞助 
 
 作者：**[XJHya](https://github.com/xjh2009)**<br>
 
@@ -17,6 +17,9 @@
 ![v安慕希沃搓了](https://github.com/user-attachments/assets/40660395-2829-4738-ad8e-55a60cffb503)
 ![迈快恋姬倭厝叻](https://github.com/user-attachments/assets/ba0367f2-e0f7-4d56-bef9-bc60305583ad)
 ![eb01a45950b6b71cdb4b01a4dc1da757](https://github.com/user-attachments/assets/61337054-3f1c-4683-97e0-b62ce11b9dcc)
+<img width="3839" height="1827" alt="bf50f1375e63ed162548c264874d4ec5" src="https://github.com/user-attachments/assets/0d09d3f0-f0e8-43e1-b9d0-d69292c5ef2c" />
+
+
 </details>
 
 
@@ -27,13 +30,13 @@ Wemc双毕业
 麦块联机双毕业
 海绵联机B站毕业
 糖糕云账户毕业
-
+岸云被封号且被威胁
 
 </details>
 
 ## Tips
 
-各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[岸云数据](https://www.anvps.cn/)/[麦块联机](https://minekuai.com/)/[辰隙互联](https://www.singsi.cn/)/[鱼乐云](https://www.ueidc.cn/)
+各厂商链接[海绵联机](https://www.yunmc.vip/)/[雨云](https://www.rainyun.com/)/[优丰互联](https://www.disxcloud.com/)/[WeMC](https://wemc.cc/)/[量芯云](https://idc.prolzy.com/)/[灰狼云](https://www.yun316.net/)/[麦块联机](https://minekuai.com/)/[辰隙互联](https://www.singsi.cn/)/[鱼乐云](https://www.ueidc.cn/)
 
 如果有免费面板服/可以续费的云厂商 可以联系我QQ：2012036686
 
@@ -95,19 +98,17 @@ test1@test1.com:password1,test2@test2.com:password2
 </details>
 
 
-### 1.优丰互联/大东云/岸云数据
+### 1.优丰互联/大东云
 
 
 #### 添加续费任务
-岸云因为源站垃圾所以暂时搞不了 <br>
-sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东云)/anvps(岸云数据)<br>
+sign.json文件，分别添加你的用户ID yfidc(优丰互联)/ddyidc(大东云)<br>
 示例，假设这三家IDC用户ID都为`114514`和`123456`就可以这样填
 <br>
 ```json
 {
     "ddyidc": [114514,123456],    
-    "yfidc": [114514,123456],
-    "anvps": [114514,123456]
+    "yfidc": [114514,123456]
 }
 ```
 文件提交后，自动进入Github Action构建
@@ -194,3 +195,4 @@ Tips:因为他们续费服务器的接口还是太丑了 所以只做签到
 
 ### 定时执行
 每日北京时间6点自动续费<br>
+
