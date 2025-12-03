@@ -19,7 +19,8 @@ jobs:
         uid_list=$(jq -r '.yfidc[]' sign.json)
         for uid in $uid_list; do
           echo "即将签到用户: $uid"
-          response=$(curl -s -X POST -d "uid=${uid}" "https://disxcloud.com/addons?_plugin=check&_controller=index&_action=index")
+          response=$(curl -s -X POST -d "uid=${uid}" -d "type=sign" "https://www.disxcloud.com/addons?_plugin=79&_controller=index&_action=index")
           msg=$(echo "$response" | jq -r '.msg')
           echo "用户 $uid : $msg"
         done
+
